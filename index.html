@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaïma Ouerghi — Full-Stack Developer</title>
+<meta name="description" content="Chaïma Ouerghi — Full-Stack Developer & AI Engineer specializing in machine learning, data analytics, and full-stack software engineering.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230A0A0F'/%3E%3Ctext x='32' y='40' font-family='monospace' font-weight='700' font-size='22' fill='%2300D4FF' text-anchor='middle'%3ECO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="boot-loader" id="bootLoader" aria-hidden="true">
+  <div class="boot-line" data-line>$ initializing portfolio<span class="ok">.dev</span></div>
+  <div class="boot-line" data-line>&gt; loading modules ................. <span class="ok">[OK]</span></div>
+  <div class="boot-line" data-line>&gt; compiling scene graph ........... <span class="ok">[OK]</span></div>
+  <div class="boot-line" data-line>&gt; establishing render pipeline .... <span class="ok">[OK]</span></div>
+  <div class="boot-line" data-line>&gt; user: ouerghi_chaima</div>
+  <div class="boot-line" data-line>&gt; role: full-stack developer / ai engineer</div>
+  <div class="boot-line" data-line>$ ready<span class="boot-cursor"></span></div>
+</div>
+
+<canvas id="scene-canvas" aria-hidden="true"></canvas>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#hero" class="brand">chaima<span class="brand-accent">.dev</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#about" class="nav-link">about</a>
+      <a href="#skills" class="nav-link">skills</a>
+      <a href="#experience" class="nav-link">experience</a>
+      <a href="#projects" class="nav-link">projects</a>
+      <a href="#education" class="nav-link">education</a>
+      <a href="#contact" class="nav-link nav-link-cta">contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hero-eyebrow reveal" data-reveal="fade"><span class="prompt-sym">&gt;</span>Hello, I am</p>
+        <h1 class="hero-name reveal" data-reveal="fade" data-delay="100">
+          <span class="glow-text">Ouerghi Chaïma</span>
+        </h1>
+        <p class="hero-subtitle reveal" data-reveal="fade" data-delay="200">
+          <span class="accent">Full-Stack Developer</span> &amp; AI Engineer
+        </p>
+        <p class="hero-tagline reveal" data-reveal="fade" data-delay="300">
+          Building intelligent, data-driven systems at the intersection of
+          machine learning, embedded engineering, and full-stack software —
+          from model to production.
+        </p>
+        <div class="hero-actions reveal" data-reveal="fade" data-delay="400">
+          <a href="#projects" class="btn btn-primary">View Work</a>
+          <a href="#contact" class="btn btn-outline">Contact</a>
+        </div>
+      </div>
+
+      <div class="hero-scene-anchor reveal" data-reveal="scale" data-delay="250">
+        <div class="hero-terminal" id="heroTerminal">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            </div>
+            <span class="terminal-title">ouerghi@portfolio: ~</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="prompt">$</span>whoami</p>
+            <p class="t-out">ouerghi_chaima — software engineer</p>
+            <p><span class="prompt">$</span>cat focus.json</p>
+            <p class="t-out">{ <span class="t-key">"ai_ml"</span>: <span class="t-key">true</span>, <span class="t-key">"full_stack"</span>: <span class="t-key">true</span> }</p>
+            <p><span class="prompt">$</span>status</p>
+            <p class="t-out">open to opportunities <span class="terminal-cursor"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll to next section">
+      <span class="scroll-cue-line"></span>
+      <span class="scroll-cue-label">Scroll</span>
+    </a>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="section-scrim"></div>
+    <div class="container">
+      <div class="section-head reveal" data-reveal="fade">
+        <span class="section-kicker">01 · profile</span>
+        <h2 class="section-title">About</h2>
+      </div>
+
+      <div class="about-layout">
+        <div class="about-portrait reveal" data-reveal="fade">
+          <div class="portrait-frame">
+            <img src="assets/img/profile.jpg" alt="Portrait of Chaïma Ouerghi" loading="lazy" width="320" height="410">
+          </div>
+          <div class="portrait-caption">Tunisia &mdash; La Goulette</div>
+        </div>
+
+        <div class="about-card glass-card reveal" data-reveal="fade" data-delay="100">
+          <p class="about-lede">
+            Software Engineering student with a strong foundation in
+            <span class="accent">Artificial Intelligence</span>, Machine Learning, Data
+            Analytics, and Full-Stack Development.
+          </p>
+          <p>
+            Holder of a Bachelor&rsquo;s degree in Embedded Systems and Mobile Development,
+            with hands-on experience across telecommunications, industrial automation,
+            cybersecurity, and automotive systems. Currently completing an engineering
+            degree in Software Engineering &amp; Information Systems at TEKUP, focused on
+            designing intelligent software using large language models, predictive
+            analytics, and automation to solve real-world business problems.
+          </p>
+
+          <div class="about-quickfacts">
+            <div class="tag-row">
+              <span class="tag tag-outline">+216 93 176 660</span>
+              <span class="tag tag-outline">Tunisia &mdash; La Goulette</span>
+              <span class="tag tag-outline">Driving License</span>
+            </div>
+          </div>
+
+          <div class="about-orbit-icons" aria-hidden="true">
+            <span class="orbit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            </span>
+            <span class="orbit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 17v-6M7 8v.01M12 17v-3.5a2.5 2.5 0 0 1 5 0V17M12 10v7"/></svg>
+            </span>
+            <span class="orbit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat reveal" data-reveal="fade" data-delay="100">
+              <span class="stat-number" data-count="4">0</span>
+              <span class="stat-label">Professional Internships</span>
+            </div>
+            <div class="stat reveal" data-reveal="fade" data-delay="200">
+              <span class="stat-number" data-count="25" data-suffix="K+">0</span>
+              <span class="stat-label">Records Analyzed</span>
+            </div>
+            <div class="stat reveal" data-reveal="fade" data-delay="300">
+              <span class="stat-number" data-count="7">0</span>
+              <span class="stat-label">Major Projects Delivered</span>
+            </div>
+            <div class="stat reveal" data-reveal="fade" data-delay="400">
+              <span class="stat-number" data-count="3">0</span>
+              <span class="stat-label">Languages Spoken</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section skills" id="skills">
+    <div class="section-scrim"></div>
+    <div class="container">
+      <div class="section-head reveal" data-reveal="fade">
+        <span class="section-kicker">02 · stack</span>
+        <h2 class="section-title">Skills</h2>
+      </div>
+
+      <div class="skills-columns">
+        <div class="skills-block reveal" data-reveal="fade">
+          <h3 class="skills-block-title">// technical</h3>
+
+          <div class="skill-group">
+            <div class="skill-group-head">Programming Languages</div>
+            <div class="tag-row">
+              <span class="tag">Python</span><span class="tag">Java</span>
+              <span class="tag">JavaScript</span><span class="tag">SQL</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-head">AI &amp; Machine Learning</div>
+            <div class="tag-row">
+              <span class="tag">Machine Learning</span><span class="tag">LLMs</span>
+              <span class="tag">Scikit-learn</span><span class="tag">XGBoost</span>
+              <span class="tag">Prophet</span><span class="tag">NLP</span>
+              <span class="tag">MediaPipe</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-head">Data Analytics</div>
+            <div class="tag-row">
+              <span class="tag">Pandas</span><span class="tag">NumPy</span>
+              <span class="tag">Data Visualization</span><span class="tag">ETL Pipelines</span>
+              <span class="tag">Feature Engineering</span><span class="tag">Predictive Analytics</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-head">Web Development</div>
+            <div class="tag-row">
+              <span class="tag">Angular</span><span class="tag">React</span>
+              <span class="tag">Node.js</span><span class="tag">FastAPI</span>
+              <span class="tag">REST APIs</span><span class="tag">HTML5 / CSS3</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-head">Databases &amp; DevOps</div>
+            <div class="tag-row">
+              <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span>
+              <span class="tag">Firebase</span><span class="tag">Docker</span>
+              <span class="tag">Git / GitHub</span><span class="tag">CI/CD</span>
+              <span class="tag">Linux</span><span class="tag">AWS</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-head">Embedded Systems &amp; IoT</div>
+            <div class="tag-row">
+              <span class="tag">Raspberry Pi</span><span class="tag">STM32</span>
+              <span class="tag">Arduino</span><span class="tag">Microcontrollers</span>
+              <span class="tag">OBD-II</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-head">Automation &amp; Security</div>
+            <div class="tag-row">
+              <span class="tag">n8n</span><span class="tag">API Integration</span>
+              <span class="tag">Malware Analysis</span><span class="tag">VirusTotal</span>
+              <span class="tag">AlienVault OTX</span><span class="tag">Threat Intelligence</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-block reveal" data-reveal="fade" data-delay="150">
+          <h3 class="skills-block-title">// proficiency</h3>
+          <div class="proficiency-list">
+            <div class="proficiency-item">
+              <div class="proficiency-item-head"><span>Machine Learning &amp; Data Analytics</span><span class="pct">92%</span></div>
+              <div class="proficiency-bar"><div class="proficiency-fill" data-level="92"></div></div>
+            </div>
+            <div class="proficiency-item">
+              <div class="proficiency-item-head"><span>Full-Stack Development</span><span class="pct">88%</span></div>
+              <div class="proficiency-bar"><div class="proficiency-fill" data-level="88"></div></div>
+            </div>
+            <div class="proficiency-item">
+              <div class="proficiency-item-head"><span>Software Engineering &amp; Architecture</span><span class="pct">85%</span></div>
+              <div class="proficiency-bar"><div class="proficiency-fill" data-level="85"></div></div>
+            </div>
+            <div class="proficiency-item">
+              <div class="proficiency-item-head"><span>Embedded Systems &amp; IoT</span><span class="pct">80%</span></div>
+              <div class="proficiency-bar"><div class="proficiency-fill" data-level="80"></div></div>
+            </div>
+            <div class="proficiency-item">
+              <div class="proficiency-item-head"><span>Automation &amp; Cybersecurity</span><span class="pct">78%</span></div>
+              <div class="proficiency-bar"><div class="proficiency-fill" data-level="78"></div></div>
+            </div>
+          </div>
+
+          <h3 class="skills-block-title skills-block-title-spaced">// professional</h3>
+          <div class="tag-row">
+            <span class="tag tag-outline">Analytical Thinking</span>
+            <span class="tag tag-outline">Problem Solving</span>
+            <span class="tag tag-outline">Team Collaboration</span>
+            <span class="tag tag-outline">Adaptability</span>
+            <span class="tag tag-outline">Technical Communication</span>
+            <span class="tag tag-outline">Agile &amp; Scrum</span>
+          </div>
+
+          <h3 class="skills-block-title skills-block-title-spaced">// languages</h3>
+          <div class="language-list">
+            <div class="language-item"><span class="language-name">Arabic</span><span class="language-level">Native</span></div>
+            <div class="language-item"><span class="language-name">French</span><span class="language-level">Professional</span></div>
+            <div class="language-item"><span class="language-name">English</span><span class="language-level">Professional</span></div>
+            <div class="language-item"><span class="language-name">German</span><span class="language-level">Basic</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section experience" id="experience">
+    <div class="section-scrim"></div>
+    <div class="container">
+      <div class="section-head reveal" data-reveal="fade">
+        <span class="section-kicker">03 · career</span>
+        <h2 class="section-title">Experience</h2>
+      </div>
+
+      <div class="timeline">
+
+        <article class="timeline-item reveal" data-reveal="left">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta">
+              <span class="timeline-date">Feb 2026 &ndash; Aug 2026</span>
+              <span class="timeline-tag">Final Year Engineering Project</span>
+            </div>
+            <h3 class="timeline-role">AI &amp; Data Analyst Intern</h3>
+            <p class="timeline-org">Huawei Technologies Tunisia &mdash; SpiriCom: Telecom Complaint Analytics &amp; Network Intelligence Platform</p>
+            <ul class="timeline-list">
+              <li>Designed an end-to-end NOC intelligence platform connecting customer complaint data with network performance indicators for proactive service monitoring.</li>
+              <li>Processed and analysed over 25,000 telecom customer complaints alongside a 4,896-subscriber network KPI dataset.</li>
+              <li>Built machine learning models for network anomaly detection (Isolation Forest + statistical methods), SHAP-explained subscriber disengagement prediction (Random Forest), and behavioural segmentation (K-Means).</li>
+              <li>Developed ETL pipelines for data ingestion, preprocessing, feature engineering, and quality validation, following a hybrid CRISP-DM / Scrum methodology.</li>
+              <li>Performed spatio-temporal analysis to identify recurring service degradation patterns across Tunisia&rsquo;s governorates.</li>
+              <li>Built an interactive React-based NOC dashboard, GIS complaint map, and admin console for Network Operations Center teams.</li>
+              <li>Designed a multilingual (Arabic, French, English) NLP pipeline and an LLM-based conversational assistant to support engineer investigations.</li>
+            </ul>
+            <p class="timeline-stack">Python · Pandas · Scikit-learn · XGBoost · Prophet · React · FastAPI · MLflow · SQL</p>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal" data-reveal="right">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-date">Jul 2025 &ndash; Aug 2025</span></div>
+            <h3 class="timeline-role">AI Engineer Intern</h3>
+            <p class="timeline-org">Intellisec Solutions &mdash; Canada</p>
+            <ul class="timeline-list">
+              <li>Designed and implemented three AI-powered applications using Large Language Models.</li>
+              <li>Developed five automation workflows using n8n to streamline operational processes and reduce manual processing time.</li>
+              <li>Conducted malware intelligence analysis using VirusTotal and AlienVault OTX, contributing to cybersecurity threat-detection and automation pipelines.</li>
+            </ul>
+            <p class="timeline-stack">Python · OpenAI APIs · n8n · LLMs · VirusTotal · OTX</p>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal" data-reveal="left">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta">
+              <span class="timeline-date">Jan 2023 &ndash; Jun 2023</span>
+              <span class="timeline-tag">Bachelor&rsquo;s Final Project</span>
+            </div>
+            <h3 class="timeline-role">Full-Stack Developer Intern</h3>
+            <p class="timeline-org">FouFusa &mdash; Le Kef &mdash; SAWSTOP: Industrial Safety Monitoring System</p>
+            <ul class="timeline-list">
+              <li>Designed and developed a smart industrial safety platform for manufacturing workshops.</li>
+              <li>Implemented a real-time hand-detection system using MediaPipe and Raspberry Pi to prevent hazardous machine interactions.</li>
+              <li>Built a complete web platform with Angular, Node.js, and Firebase, integrating IoT devices with cloud services and applying MVC architecture with full UML documentation.</li>
+            </ul>
+            <p class="timeline-stack">Angular · Node.js · Firebase · Raspberry Pi · MediaPipe · UML</p>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal" data-reveal="right">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-date">Oct 2022</span></div>
+            <h3 class="timeline-role">Embedded Systems Intern</h3>
+            <p class="timeline-org">Renault &mdash; Le Kef</p>
+            <ul class="timeline-list">
+              <li>Participated in embedded software development for automotive electronic control systems and performed vehicle diagnostics using OBD-II tools.</li>
+              <li>Assisted in software testing, validation, system troubleshooting, and embedded software integration.</li>
+            </ul>
+            <p class="timeline-stack">Embedded C · OBD-II · Automotive Electronics</p>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal" data-reveal="left">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-date">Feb 2021</span></div>
+            <h3 class="timeline-role">Customer Service Assistant</h3>
+            <p class="timeline-org">STB Banque &mdash; Aïn Draham</p>
+            <ul class="timeline-list">
+              <li><strong>Operations Management:</strong> Supervised front-office operations, improving customer satisfaction rate by 30%.</li>
+              <li><strong>Customer Service:</strong> Processed 40+ daily customer requests with efficient problem resolution.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section projects" id="projects">
+    <div class="section-scrim"></div>
+    <div class="container">
+      <div class="section-head reveal" data-reveal="fade">
+        <span class="section-kicker">04 · selected work</span>
+        <h2 class="section-title">Projects</h2>
+      </div>
+
+      <div class="project-group">
+        <h3 class="skills-block-title">// web</h3>
+        <div class="project-grid">
+
+          <article class="project-card reveal" data-reveal="scale" data-tilt>
+            <div class="project-code">
+<span class="c-fn">model</span> = <span class="c-fn">IsolationForest</span>(<span class="c-kw">contamination</span>=<span class="c-num">0.02</span>)
+<span class="c-fn">model</span>.<span class="c-fn">fit</span>(kpi_features)
+anomalies = <span class="c-fn">model</span>.<span class="c-fn">predict</span>(kpi_features)
+<span class="c-com"># flag network degradation</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">SpiriCom</h3>
+              <p class="project-card-subtitle">AI-Powered NOC Intelligence Platform</p>
+              <p class="project-card-desc">
+                Full-stack platform combining multilingual NLP, ML-based anomaly detection,
+                disengagement prediction, and subscriber segmentation, with MLflow experiment
+                tracking and CI/CD deployment.
+              </p>
+              <div class="tag-row">
+                <span class="tag">React</span><span class="tag">FastAPI</span>
+                <span class="tag">Scikit-learn</span><span class="tag">XGBoost</span>
+                <span class="tag">MLflow</span><span class="tag">Docker</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/SpiriCom" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="120" data-tilt>
+            <div class="project-code">
+<span class="c-kw">class</span> <span class="c-fn">LLMProvider</span>(Strategy):
+    <span class="c-kw">def</span> <span class="c-fn">query</span>(self, prompt: <span class="c-fn">str</span>):
+        <span class="c-kw">return</span> self.client.complete(prompt)
+<span class="c-com"># local + cloud, one interface</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">AI NOC Assistant</h3>
+              <p class="project-card-subtitle">LLM-Based Conversational Assistant</p>
+              <p class="project-card-desc">
+                Context-grounded assistant aggregating outputs from SpiriCom&rsquo;s analytical
+                modules through a provider-agnostic architecture (Strategy pattern), supporting
+                both local (Ollama) and cloud LLMs (Gemini, Groq, OpenAI, Claude).
+              </p>
+              <div class="tag-row">
+                <span class="tag">LLMs</span><span class="tag">Strategy Pattern</span>
+                <span class="tag">Ollama</span><span class="tag">OpenAI</span><span class="tag">Gemini</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="240" data-tilt>
+            <div class="project-code">
+results = hands.process(frame)
+<span class="c-kw">if</span> results.multi_hand_landmarks:
+    <span class="c-fn">trigger_emergency_stop</span>()
+<span class="c-com"># real-time hand-detection safety</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">SAWSTOP</h3>
+              <p class="project-card-subtitle">Industrial Safety Monitoring System</p>
+              <p class="project-card-desc">
+                Real-time hand-detection safety system for manufacturing workshops, combining
+                a Raspberry Pi / MediaPipe edge pipeline with a full Angular / Node.js /
+                Firebase web platform.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Raspberry Pi</span><span class="tag">MediaPipe</span>
+                <span class="tag">Angular</span><span class="tag">Node.js</span><span class="tag">Firebase</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="360" data-tilt>
+            <div class="project-code">
+report = virustotal.scan(file_hash)
+otx_data = otx.get_indicators(ioc)
+risk = <span class="c-fn">merge_intel</span>(report, otx_data)
+<span class="c-com"># unified threat verdict</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">HybrideAnalysisWeb</h3>
+              <p class="project-card-subtitle">Hybrid Threat Intelligence Platform</p>
+              <p class="project-card-desc">
+                Web-based security platform integrating VirusTotal and AlienVault OTX for
+                hybrid file and indicator-of-compromise analysis.
+              </p>
+              <div class="tag-row">
+                <span class="tag">HTML/CSS/JS</span><span class="tag">VirusTotal</span>
+                <span class="tag">AlienVault OTX</span><span class="tag">Threat Intelligence</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/HybrideAnalysisWeb" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="480" data-tilt>
+            <div class="project-code">
+ip_input <span class="c-kw">-&gt;</span> otx.lookup <span class="c-kw">-&gt;</span> virustotal.check
+<span class="c-kw">if</span> reputation == <span class="c-str">"malicious"</span>:
+    telegram.alert(ip)
+<span class="c-com"># automated IP reputation pipeline</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">AnalyseIPs</h3>
+              <p class="project-card-subtitle">Automated IP Reputation Pipeline</p>
+              <p class="project-card-desc">
+                n8n automation workflow that checks IP reputation via AlienVault OTX and
+                VirusTotal, alerting through Telegram.
+              </p>
+              <div class="tag-row">
+                <span class="tag">n8n</span><span class="tag">VirusTotal</span>
+                <span class="tag">AlienVault OTX</span><span class="tag">Telegram API</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/AnalyseIPs" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="600" data-tilt>
+            <div class="project-code">
+scene.add(snakeMesh);
+<span class="c-kw">if</span> (<span class="c-fn">checkCollision</span>(head, food)) {
+  growSnake();
+}
+<span class="c-com">// 3D snake, real-time WebGL render</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">SnakeGame</h3>
+              <p class="project-card-subtitle">3D Snake, Reimagined</p>
+              <p class="project-card-desc">
+                A modern 3D Snake game with a futuristic interface, built with Three.js and
+                rendered in real time.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Three.js</span><span class="tag">JavaScript</span>
+                <span class="tag">WebGL</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/SnakeGame" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="720" data-tilt>
+            <div class="project-code">
+<span class="c-kw">const</span> <span class="c-fn">handleSwipe</span> = (dir) =&gt; {
+  <span class="c-kw">if</span> (dir === <span class="c-str">'right'</span>) matchUser(profile.id);
+  nextProfile();
+};
+<span class="c-com">// swipe discovery, real-time chat</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">TinderClone</h3>
+              <p class="project-card-subtitle">Aura &mdash; Swipe-Based Dating App</p>
+              <p class="project-card-desc">
+                A Tinder-inspired dating app with swipeable profile discovery, real-time
+                chat, and an AI coaching feature, built with React and Ionic.
+              </p>
+              <div class="tag-row">
+                <span class="tag">React</span><span class="tag">Ionic</span>
+                <span class="tag">TypeScript</span><span class="tag">Firebase</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/TinderClone" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="project-group project-group-spaced">
+        <h3 class="skills-block-title">// mobile</h3>
+        <div class="project-grid">
+
+          <article class="project-card reveal" data-reveal="scale" data-tilt>
+            <div class="project-code">
+VTResponse vt = vtApi.scanFile(apkHash);
+OTXPulse otx = otxApi.getPulses(ioc);
+<span class="c-kw">boolean</span> malicious = vt.isFlagged() || otx.hasThreat();
+<span class="c-com">// on-device threat detection</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">HybrideAnalysisMobile</h3>
+              <p class="project-card-subtitle">Android Threat Detection</p>
+              <p class="project-card-desc">
+                Android application integrating VirusTotal and AlienVault OTX for hybrid
+                file and indicator-of-compromise threat detection.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Java</span><span class="tag">Android</span>
+                <span class="tag">VirusTotal</span><span class="tag">AlienVault OTX</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/HybrideAnalysisMobile" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="150" data-tilt>
+            <div class="project-code">
+<span class="c-fn">double</span> bmi = weight / <span class="c-fn">Math.pow</span>(heightM, <span class="c-num">2</span>);
+tracker.<span class="c-fn">logCalories</span>(mealEntry);
+tracker.<span class="c-fn">logWater</span>(intakeMl);
+<span class="c-com">// activity, nutrition &amp; goal tracking</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">TekFit</h3>
+              <p class="project-card-subtitle">Fitness &amp; Nutrition Tracker</p>
+              <p class="project-card-desc">
+                Android fitness app for tracking activity, nutrition, and health goals,
+                with calorie/water logging, BMI tracking, and social features.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Java</span><span class="tag">Android</span>
+                <span class="tag">Firebase</span><span class="tag">Gradle</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/TekFit" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-reveal="scale" data-delay="300" data-tilt>
+            <div class="project-code">
+<span class="c-kw">let</span> entry = ActivityEntry(steps: count, date: <span class="c-fn">Date</span>())
+tracker.<span class="c-fn">save</span>(entry)
+<span class="c-com">// native iOS fitness tracking</span>
+            </div>
+            <div class="project-card-body">
+              <h3 class="project-card-title">FitTracker-IOS</h3>
+              <p class="project-card-subtitle">iOS Fitness Tracker</p>
+              <p class="project-card-desc">
+                Native iOS fitness tracking application built with Swift, with Firebase
+                integration and a full unit/UI test suite.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Swift</span><span class="tag">iOS</span>
+                <span class="tag">Xcode</span><span class="tag">Firebase</span>
+              </div>
+              <a href="https://github.com/Ouerghi23/FitTracker-IOS" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                view_repository() <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section education" id="education">
+    <div class="section-scrim"></div>
+    <div class="container">
+      <div class="section-head reveal" data-reveal="fade">
+        <span class="section-kicker">05 · academic background</span>
+        <h2 class="section-title">Education</h2>
+      </div>
+
+      <div class="education-list">
+        <div class="education-item reveal" data-reveal="fade">
+          <div class="education-date">2023 &ndash; 2026</div>
+          <div class="education-body">
+            <h3 class="education-degree">Engineering Degree &mdash; Software Engineering &amp; Information Systems</h3>
+            <p class="education-institution">TEKUP, Tunis</p>
+            <p class="education-detail">
+              Final Year Project: SpiriCom &mdash; AI-powered Telecom Complaint Analytics
+              &amp; Network Intelligence Platform, developed in collaboration with
+              Huawei Technologies Tunisia.
+            </p>
+          </div>
+        </div>
+
+        <div class="education-item reveal" data-reveal="fade" data-delay="150">
+          <div class="education-date">2020 &ndash; 2023</div>
+          <div class="education-body">
+            <h3 class="education-degree">National Bachelor&rsquo;s Degree &mdash; Embedded Systems &amp; Mobile Development</h3>
+            <p class="education-institution">Higher Institute of Technological Studies, Le Kef</p>
+            <p class="education-detail">
+              Graduated with Good Distinction. Bachelor Project: Industrial Safety
+              Monitoring System using Raspberry Pi and MediaPipe.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="section-scrim"></div>
+    <div class="container">
+      <div class="section-head reveal" data-reveal="fade">
+        <span class="section-kicker">06 · get in touch</span>
+        <h2 class="section-title">Contact</h2>
+      </div>
+
+      <div class="contact-inner reveal" data-reveal="fade" data-delay="100">
+        <p class="contact-lede">
+          Open to opportunities in <span class="accent">AI engineering</span>, data
+          analytics, and full-stack development. Feel free to reach out.
+        </p>
+
+        <div class="contact-links">
+          <a href="mailto:shaymaouerghi0@gmail.com" class="contact-link">
+            <span class="contact-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+              <span class="contact-link-label">Email</span>
+            </span>
+            <span class="contact-link-value">shaymaouerghi0@gmail.com</span>
+          </a>
+          <a href="tel:+21693176660" class="contact-link">
+            <span class="contact-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span class="contact-link-label">Phone</span>
+            </span>
+            <span class="contact-link-value">+216 93 176 660</span>
+          </a>
+          <a href="https://linkedin.com/in/OuerghiChaima" class="contact-link" target="_blank" rel="noopener noreferrer">
+            <span class="contact-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span class="contact-link-label">LinkedIn</span>
+            </span>
+            <span class="contact-link-value">linkedin.com/in/OuerghiChaima</span>
+          </a>
+          <a href="https://github.com/Ouerghi23" class="contact-link" target="_blank" rel="noopener noreferrer">
+            <span class="contact-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+              <span class="contact-link-label">GitHub</span>
+            </span>
+            <span class="contact-link-value">github.com/Ouerghi23</span>
+          </a>
+        </div>
+
+        <div class="contact-cta">
+          <a href="mailto:shaymaouerghi0@gmail.com" class="btn btn-primary">Say Hello</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>&copy; 2026 ouerghi_chaima</span>
+    <a href="#hero" class="footer-back">cd ~/top</a>
+  </div>
+</footer>
+
+<script type="module" src="assets/js/scene.js"></script>
+<script src="assets/js/boot.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
