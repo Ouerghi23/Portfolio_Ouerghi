@@ -1,204 +1,220 @@
+/* ==========================================================================
+   Interactions: header, nav, reveals, counters, magnetic buttons,
+   spotlight cards, project filters, timeline progress, copy email, clock.
+   ========================================================================== */
 (() => {
   "use strict";
+  const root = document.documentElement;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  window.__revealReady = true;
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  /* -----------------------------------------------------------------------
-     Header state on scroll + progress bar
-     ----------------------------------------------------------------------- */
+  /* ---------- header state + progress ---------- */
   const header = document.getElementById("siteHeader");
-  const progressBar = document.getElementById("progressBar");
+  const progress = document.getElementById("progress");
+  const timeline = document.getElementById("timeline");
+  const timelineFill = document.getElementById("timelineFill");
+  let ticking = false;
 
   const onScroll = () => {
-    const scrollY = window.scrollY || window.pageYOffset;
-    header.classList.toggle("scrolled", scrollY > 40);
+    ticking = false;
+    const y = window.scrollY;
+    header.classList.toggle("is-scrolled", y > 40);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
 
-    const docHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-    progressBar.style.width = progress + "%";
+    if (timeline && timelineFill && root.classList.contains("motion")) {
+      const r = timeline.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = Math.min(1, Math.max(0, (vh * 0.6 - r.top) / r.height));
+      timelineFill.style.setProperty("--p", p.toFixed(3));
+    }
   };
-
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
 
-  /* -----------------------------------------------------------------------
-     Mobile nav toggle
-     ----------------------------------------------------------------------- */
-  const navToggle = document.getElementById("navToggle");
-  const mainNav = document.getElementById("mainNav");
-
-  navToggle.addEventListener("click", () => {
-    const isOpen = mainNav.classList.toggle("is-open");
-    navToggle.classList.toggle("is-open", isOpen);
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-  });
-
-  mainNav.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      mainNav.classList.remove("is-open");
-      navToggle.classList.remove("is-open");
-      navToggle.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  /* -----------------------------------------------------------------------
-     Active nav link tracking
-     ----------------------------------------------------------------------- */
-  const sections = document.querySelectorAll("main section[id]");
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  const setActiveLink = (id) => {
-    navLinks.forEach((link) => {
-      link.classList.toggle(
-        "is-active",
-        link.getAttribute("href") === `#${id}`
-      );
-    });
+  /* ---------- nav: mobile toggle ---------- */
+  const nav = document.getElementById("nav");
+  const toggle = document.getElementById("navToggle");
+  const setMenu = (open) => {
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   };
+  toggle.addEventListener("click", () => setMenu(!nav.classList.contains("is-open")));
+  nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) setActiveLink(entry.target.id);
-      });
-    },
-    { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
-  );
+  /* ---------- nav: sliding active indicator ---------- */
+  const indicator = document.getElementById("navIndicator");
+  const links = [...nav.querySelectorAll(".nav-link")];
+  const moveIndicator = (link) => {
+    if (!indicator) return;
+    if (!link) { indicator.style.opacity = "0"; return; }
+    indicator.style.opacity = "1";
+    indicator.style.width = `${link.offsetWidth}px`;
+    indicator.style.transform = `translateX(${link.offsetLeft}px)`;
+  };
+  const sectionIds = links.map((l) => l.getAttribute("href").slice(1));
+  const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+  let current = null;
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (en.isIntersecting) current = en.target.id; });
+    const top = window.scrollY < window.innerHeight * 0.5;
+    links.forEach((l) => l.classList.toggle("is-active", !top && l.getAttribute("href") === `#${current}`));
+    moveIndicator(top ? null : links.find((l) => l.classList.contains("is-active")));
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  sections.forEach((s) => spy.observe(s));
+  window.addEventListener("resize", () => moveIndicator(links.find((l) => l.classList.contains("is-active"))));
 
-  sections.forEach((section) => navObserver.observe(section));
-
-  /* -----------------------------------------------------------------------
-     Scroll reveal
-     ----------------------------------------------------------------------- */
-  const revealEls = document.querySelectorAll(".reveal");
-
-  if (prefersReducedMotion) {
-    revealEls.forEach((el) => el.classList.add("is-visible"));
+  /* ---------- scroll reveal with sibling stagger ---------- */
+  const reveals = [...document.querySelectorAll("[data-reveal]")];
+  const groups = new Map();
+  reveals.forEach((el) => {
+    const g = el.parentElement;
+    const i = groups.get(g) || 0;
+    el.style.setProperty("--i", Math.min(i, 6));
+    groups.set(g, i + 1);
+  });
+  if (!root.classList.contains("motion")) {
+    reveals.forEach((el) => el.classList.add("is-in"));
   } else {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const delay = el.dataset.delay || 0;
-          el.style.setProperty("--reveal-delay", `${delay}ms`);
-          el.classList.add("is-visible");
-          observer.unobserve(el);
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
-    );
-
-    revealEls.forEach((el) => revealObserver.observe(el));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("is-in");
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    reveals.forEach((el) => io.observe(el));
   }
 
-  /* -----------------------------------------------------------------------
-     Animated counters
-     ----------------------------------------------------------------------- */
-  const counters = document.querySelectorAll(".stat-number");
-
-  const animateCounter = (el) => {
-    const target = parseInt(el.dataset.count, 10) || 0;
-    const suffix = el.dataset.suffix || "";
-    const duration = 1400;
-    const start = performance.now();
-
-    const step = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = Math.round(eased * target);
-      el.textContent = value + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-
-    if (prefersReducedMotion) {
-      el.textContent = target + suffix;
-    } else {
-      requestAnimationFrame(step);
-    }
-  };
-
-  const counterObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
+  /* ---------- counters ---------- */
+  const counters = document.querySelectorAll("[data-count]");
+  if (!reduced) {
+    const co = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        co.unobserve(el);
+        const target = +el.dataset.count;
+        const suffix = el.dataset.suffix || "";
+        const t0 = performance.now(), dur = 1600;
+        const tick = (now) => {
+          const k = Math.min(1, (now - t0) / dur);
+          const e = 1 - Math.pow(1 - k, 4);
+          el.textContent = Math.round(target * e) + suffix;
+          if (k < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
       });
-    },
-    { threshold: 0.6 }
-  );
+    }, { threshold: 0.6 });
+    counters.forEach((el) => co.observe(el));
+  }
 
-  counters.forEach((el) => counterObserver.observe(el));
-
-  /* -----------------------------------------------------------------------
-     Proficiency bars
-     ----------------------------------------------------------------------- */
-  const bars = document.querySelectorAll(".proficiency-fill");
-
-  const barObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        el.style.width = (el.dataset.level || 0) + "%";
-        observer.unobserve(el);
+  /* ---------- magnetic buttons ---------- */
+  if (finePointer && !reduced) {
+    document.querySelectorAll(".magnetic").forEach((el) => {
+      const strength = el.classList.contains("email-big") ? 0.12 : 0.28;
+      el.addEventListener("pointermove", (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) * strength;
+        const y = (e.clientY - r.top - r.height / 2) * strength;
+        el.style.transition = "transform .2s cubic-bezier(.16,1,.3,1)";
+        el.style.transform = `translate(${x}px, ${y}px)`;
       });
-    },
-    { threshold: 0.4 }
-  );
-
-  bars.forEach((el) => barObserver.observe(el));
-
-  /* -----------------------------------------------------------------------
-     3D tilt — project cards
-     ----------------------------------------------------------------------- */
-  if (!prefersReducedMotion) {
-    document.querySelectorAll("[data-tilt]").forEach((card) => {
-      const maxTilt = 8;
-
-      const onMove = (e) => {
-        const rect = card.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width;
-        const py = (e.clientY - rect.top) / rect.height;
-        const rotY = (px - 0.5) * maxTilt * 2;
-        const rotX = (0.5 - py) * maxTilt * 2;
-        card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
-      };
-
-      const onLeave = () => {
-        card.style.transform = "";
-      };
-
-      card.addEventListener("pointermove", onMove);
-      card.addEventListener("pointerleave", onLeave);
+      el.addEventListener("pointerleave", () => {
+        el.style.transition = "transform .7s cubic-bezier(.16,1,.3,1)";
+        el.style.transform = "";
+      });
     });
+  }
 
-    /* ---------------------------------------------------------------------
-       Hero terminal parallax tilt
-       --------------------------------------------------------------------- */
-    const terminal = document.getElementById("heroTerminal");
-    const heroAnchor = document.querySelector(".hero-scene-anchor");
+  /* ---------- spotlight cards ---------- */
+  if (finePointer) {
+    document.querySelectorAll(".spotlight").forEach((el) => {
+      el.addEventListener("pointermove", (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
+      });
+    });
+  }
 
-    if (terminal && heroAnchor) {
-      const baseX = -6;
-      const baseY = 10;
-      const range = 8;
+  /* ---------- project filters ---------- */
+  const filters = [...document.querySelectorAll(".filter")];
+  const projects = [...document.querySelectorAll(".project")];
+  filters.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const f = btn.dataset.filter;
+      filters.forEach((b) => { const on = b === btn; b.classList.toggle("is-active", on); b.setAttribute("aria-pressed", String(on)); });
+      const show = projects.filter((p) => f === "all" || p.dataset.cat.split(" ").includes(f));
+      const hide = projects.filter((p) => !show.includes(p));
+      if (reduced) {
+        hide.forEach((p) => p.classList.add("is-hidden"));
+        show.forEach((p) => p.classList.remove("is-hidden"));
+        return;
+      }
+      projects.forEach((p) => { p.style.opacity = "0"; p.style.transform = "translateY(12px) scale(.985)"; });
+      setTimeout(() => {
+        hide.forEach((p) => p.classList.add("is-hidden"));
+        show.forEach((p, i) => {
+          p.classList.remove("is-hidden");
+          p.classList.add("is-in");
+          p.style.transitionDelay = `${i * 50}ms`;
+          requestAnimationFrame(() => requestAnimationFrame(() => { p.style.opacity = ""; p.style.transform = ""; }));
+          setTimeout(() => { p.style.transitionDelay = ""; }, 700 + i * 50);
+        });
+      }, 260);
+    });
+  });
 
-      const onHeroMove = (e) => {
-        const rect = heroAnchor.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width;
-        const py = (e.clientY - rect.top) / rect.height;
-        const tiltX = baseX + (0.5 - py) * range;
-        const tiltY = baseY + (px - 0.5) * range;
-        terminal.style.setProperty("--tilt-x", `${tiltX}deg`);
-        terminal.style.setProperty("--tilt-y", `${tiltY}deg`);
-      };
+  /* ---------- marquee: duplicate the list for a seamless loop ---------- */
+  document.querySelectorAll(".marquee-track").forEach((track) => {
+    const list = track.querySelector(".marquee-list");
+    if (!list) return;
+    const clone = list.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    track.appendChild(clone);
+  });
 
-      window.addEventListener("pointermove", onHeroMove, { passive: true });
-    }
+  /* ---------- copy email + toast ---------- */
+  const toast = document.getElementById("toast");
+  let toastTimer;
+  const say = (msg) => {
+    toast.textContent = msg;
+    toast.classList.add("is-on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("is-on"), 2200);
+  };
+  document.querySelectorAll(".copy-email").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const email = btn.dataset.email;
+      const label = btn.querySelector(".copy-label");
+      const original = label ? label.textContent : "";
+      try {
+        await navigator.clipboard.writeText(email);
+        say("Email copied to clipboard");
+        if (label) { label.textContent = "Copied"; setTimeout(() => { label.textContent = original; }, 1800); }
+      } catch (_) {
+        window.location.href = `mailto:${email}`;
+      }
+    });
+  });
+
+  /* ---------- CV button: only shown if the PDF exists ---------- */
+  const cv = document.getElementById("cvLink");
+  if (cv && location.protocol.startsWith("http")) {
+    fetch(cv.getAttribute("href"), { method: "HEAD" })
+      .then((r) => { if (r.ok) cv.hidden = false; })
+      .catch(() => {});
+  }
+
+  /* ---------- local time in Tunis ---------- */
+  const timeEl = document.getElementById("localTime");
+  if (timeEl) {
+    const fmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Tunis" });
+    const tick = () => { timeEl.textContent = fmt.format(new Date()); };
+    tick(); setInterval(tick, 30000);
   }
 })();
