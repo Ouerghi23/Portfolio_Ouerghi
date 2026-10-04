@@ -4,7 +4,7 @@ A 3D scroll portfolio: as you scroll, a particle core changes shape through five
 
 **Live demo:** https://portfolio-ouerghi.vercel.app/
 
-![Demo](docs/demo.gif)
+![Demo](demo.gif)
 
 ## Features
 
