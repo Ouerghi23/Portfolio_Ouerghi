@@ -2,7 +2,7 @@
 
 A 3D scroll portfolio: as you scroll, a particle core changes shape through five steps (Input → Data → Learning → Intelligence → Action), each linked to real work.
 
-**Live demo:** https://portfolio-ouerghi.vercel.app/
+**Live demo:** portfolio-ouerghi.vercel.app
 
 ![Demo](demo.gif)
 
