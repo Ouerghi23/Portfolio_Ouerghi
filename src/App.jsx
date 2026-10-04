@@ -11,6 +11,7 @@ import { CaseStudy, Work, Experience, Skills, Education, Contact } from './compo
 import { initSmoothScroll } from './lib/smoothScroll'
 import { usePrefs } from './lib/preferences'
 import { store } from './lib/store'
+import { Analytics } from '@vercel/analytics/react'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -97,7 +98,7 @@ export default function App() {
     requestAnimationFrame(() => ScrollTrigger.refresh())
   }, { scope: root })
 
-  return (
+    return (
     <div ref={root}>
       <CoreScene />
       <div className="vignette" aria-hidden="true" />
@@ -123,6 +124,8 @@ export default function App() {
           <span>{t.ui.footer}</span>
         </div>
       </footer>
+
+      <Analytics />
     </div>
   )
 }
